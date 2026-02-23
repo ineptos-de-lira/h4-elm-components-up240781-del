@@ -4,6 +4,21 @@ import Html exposing (Html, a, div, h1, h2, h3, h4, h5, h6, li, text, ul)
 import Html.Attributes exposing (href)
 
 
+joinWords : String -> String -> String
+joinWords word1 word2 =
+    word1 ++ word2
+
+
+isUpperChars : List Char -> List Bool
+isUpperChars list =
+    List.map Char.isUpper list
+
+
+evalChars : List Char -> (Char -> Bool) -> List Bool
+evalChars chars predicate =
+    List.map predicate chars
+
+
 type alias Computer =
     { ram : String
     , model : String
@@ -23,12 +38,12 @@ myLaptop =
 
 anItem : String -> Html msg
 anItem content =
-    Html.li [] [ Html.text content ]
+    li [] [ text content ]
 
 
 aList : List String -> Html msg
 aList contents =
-    Html.ul [] (List.map anItem contents)
+    ul [] (List.map anItem contents)
 
 
 headers : String -> Html msg
@@ -60,6 +75,4 @@ main =
                 , "Pulgadas: " ++ myLaptop.screenSize
                 ]
             ]
-        , headers "Tarea de Encabezados"
-        , hyperlink "https://google.com" "Tarea de Link"
         ]
